@@ -9,8 +9,20 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @ObservedObject var viewModel = ViewModel()
+
     var body: some View {
-        Text("Hello, World!")
+        Circle()
+            .fill(viewModel.heartRateZoneColor)
+            .frame(width: 100, height: 100)
+            .overlay(
+                Text("\(Int(viewModel.heartRate))")
+        ).onAppear {
+            print("ContentView.body.onAppear()")
+            self.viewModel.authorizeHealthKit()
+            self.viewModel.refreshView()
+        }
     }
 }
 

@@ -12,8 +12,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
     func applicationDidFinishLaunching() {
         print("ExtensionDelegate.applicationDidFinishLaunching()")
-        let viewModel = ViewModel()
-        viewModel.authorizeHealthKit()
         // Perform any final initialization of your application.
     }
 

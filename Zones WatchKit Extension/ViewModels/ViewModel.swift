@@ -125,20 +125,13 @@ class ViewModel: ObservableObject {
             ninetyPercent = maxHeartRate * 0.9
 
             switch heartRate {
-            case let restingRate where restingRate < fiftyPercent:
-                completion(.resting)
-            case let veryLightRate where veryLightRate < sixtyPercent && veryLightRate >= fiftyPercent:
-                completion(.veryLight)
-            case let lightRate where lightRate < seventyPercent && lightRate >= sixtyPercent:
-                completion(.light)
-            case let moderateRate where moderateRate < eightyPercent && moderateRate >= seventyPercent:
-                completion(.moderate)
-            case let hardRate where hardRate < ninetyPercent && hardRate >= eightyPercent:
-                completion(.hard)
-            case let veryHardRate where veryHardRate >= ninetyPercent:
-                completion(.veryHard)
-            default:
-                completion(nil)
+            case let restingRate where restingRate < fiftyPercent: completion(.resting)
+            case let veryLightRate where veryLightRate < sixtyPercent: completion(.veryLight)
+            case let lightRate where lightRate < seventyPercent: completion(.light)
+            case let moderateRate where moderateRate < eightyPercent: completion(.moderate)
+            case let hardRate where hardRate < ninetyPercent: completion(.hard)
+            case let veryHardRate where veryHardRate >= ninetyPercent: completion(.veryHard)
+            default: completion(nil)
             }
         }
     }

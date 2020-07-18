@@ -13,12 +13,24 @@ struct ContentView: View {
     @ObservedObject var viewModel = ViewModel()
 
     var body: some View {
-        Circle()
-            .fill(viewModel.heartRateZoneColor)
-            .frame(width: 100, height: 100)
-            .overlay(
+        ZStack {
+            ZStack {
+                Circle()
+                    .fill(viewModel.heartRateZoneColor)
+                    .frame(width: 100, height: 100)
+                    .overlay(
+                        Circle()
+                            .stroke(Color.white, lineWidth: 2.5)
+                            .frame(width: 100, height: 100)
+                )
+            }
+            ZStack {
                 Text("\(Int(viewModel.heartRate))")
-        ).onAppear {
+                    .font(.system(size: 48))
+                    .fontWeight(.ultraLight)
+            }
+        }
+        .onAppear {
             print("ContentView.body.onAppear()")
             self.viewModel.authorizeHealthKit()
             self.viewModel.refreshView()

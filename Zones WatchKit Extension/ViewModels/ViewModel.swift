@@ -78,7 +78,7 @@ class ViewModel: ObservableObject {
                     self.heartRate = newHeartRate
                     self.heartRateZoneColor = heartRateZone.getColor()
                 }
-                print("heartRate: \(newHeartRate), heartRateZone: \(heartRateZone)")
+                print("ViewModel.refreshView() > heartRate: \(newHeartRate), heartRateZone: \(heartRateZone)")
             }
         }
         DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 5) {
@@ -102,20 +102,27 @@ class ViewModel: ObservableObject {
             print("ViewModel.fetchHeartRateZone() > yearsSinceBirth: \(yearsSinceBirth)")
 
             let maxHeartRate = 208 - 0.7 * yearsSinceBirth
-            guard let restingHeartRate = restingHeartRate else {
-                // TODO: calculate zones without resting heart rate
 
-                print("ViewModel.fetchHeartRateZone() > could not unwrap resting heart rate")
-                completion(nil)
-                return
+            var fiftyPercent: Double
+            var sixtyPercent: Double
+            var seventyPercent: Double
+            var eightyPercent: Double
+            var ninetyPercent: Double
+
+            if let restingHeartRate = restingHeartRate {
+                let heartRateReserve = maxHeartRate - restingHeartRate
+                fiftyPercent = restingHeartRate + heartRateReserve * 0.5
+                sixtyPercent = restingHeartRate + heartRateReserve * 0.6
+                seventyPercent = restingHeartRate + heartRateReserve * 0.7
+                eightyPercent = restingHeartRate + heartRateReserve * 0.8
+                ninetyPercent = restingHeartRate + heartRateReserve * 0.9
             }
 
-            let heartRateReserve = maxHeartRate - restingHeartRate
-            let fiftyPercent = restingHeartRate + heartRateReserve * 0.5
-            let sixtyPercent = restingHeartRate + heartRateReserve * 0.6
-            let seventyPercent = restingHeartRate + heartRateReserve * 0.7
-            let eightyPercent = restingHeartRate + heartRateReserve * 0.8
-            let ninetyPercent = restingHeartRate + heartRateReserve * 0.9
+            fiftyPercent = maxHeartRate * 0.5
+            sixtyPercent = maxHeartRate * 0.6
+            seventyPercent = maxHeartRate * 0.7
+            eightyPercent = maxHeartRate * 0.8
+            ninetyPercent = maxHeartRate * 0.9
 
             switch heartRate {
             case let restingRate where restingRate < fiftyPercent:

@@ -19,6 +19,7 @@
 		856109DF24C2982D0016EE05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 856109DE24C2982D0016EE05 /* Assets.xcassets */; };
 		856109E224C2982D0016EE05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 856109E124C2982D0016EE05 /* Preview Assets.xcassets */; };
 		856109F524C29E990016EE05 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 856109F424C29E990016EE05 /* HealthKit.framework */; };
+		856109F724C2A19A0016EE05 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856109F624C2A19A0016EE05 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		856109E424C2982D0016EE05 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		856109F224C29E980016EE05 /* Zones WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Zones WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		856109F424C29E990016EE05 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.2.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		856109F624C2A19A0016EE05 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,15 +130,15 @@
 		856109D324C2982C0016EE05 /* Zones WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				856109F224C29E980016EE05 /* Zones WatchKit Extension.entitlements */,
-				856109D424C2982C0016EE05 /* ContentView.swift */,
-				856109D624C2982C0016EE05 /* HostingController.swift */,
 				856109D824C2982C0016EE05 /* ExtensionDelegate.swift */,
-				856109DA24C2982C0016EE05 /* NotificationController.swift */,
-				856109DC24C2982C0016EE05 /* NotificationView.swift */,
+				856109F824C2A1BB0016EE05 /* Models */,
+				856109F924C2A1C30016EE05 /* Views */,
+				856109FA24C2A1C50016EE05 /* ViewModels */,
+				856109FB24C2A1D40016EE05 /* Controllers */,
 				856109DE24C2982D0016EE05 /* Assets.xcassets */,
-				856109E324C2982D0016EE05 /* Info.plist */,
 				856109E424C2982D0016EE05 /* PushNotificationPayload.apns */,
+				856109E324C2982D0016EE05 /* Info.plist */,
+				856109F224C29E980016EE05 /* Zones WatchKit Extension.entitlements */,
 				856109E024C2982D0016EE05 /* Preview Content */,
 			);
 			path = "Zones WatchKit Extension";
@@ -156,6 +158,39 @@
 				856109F424C29E990016EE05 /* HealthKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		856109F824C2A1BB0016EE05 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		856109F924C2A1C30016EE05 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				856109D424C2982C0016EE05 /* ContentView.swift */,
+				856109DC24C2982C0016EE05 /* NotificationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		856109FA24C2A1C50016EE05 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				856109F624C2A19A0016EE05 /* ViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		856109FB24C2A1D40016EE05 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				856109D624C2982C0016EE05 /* HostingController.swift */,
+				856109DA24C2982C0016EE05 /* NotificationController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,6 +325,7 @@
 				856109D524C2982C0016EE05 /* ContentView.swift in Sources */,
 				856109DB24C2982C0016EE05 /* NotificationController.swift in Sources */,
 				856109D924C2982C0016EE05 /* ExtensionDelegate.swift in Sources */,
+				856109F724C2A19A0016EE05 /* ViewModel.swift in Sources */,
 				856109DD24C2982C0016EE05 /* NotificationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

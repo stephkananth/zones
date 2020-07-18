@@ -40,22 +40,18 @@ class ViewModel: ObservableObject {
 
     func authorizeHealthKit() {
         print("ViewModel.authorizeHealthKit()")
-
         guard let dateOfBirth = HKObjectType.characteristicType(forIdentifier: .dateOfBirth) else {
             print("ViewModel.authorizeHealthKit() > could not unwrap date of birth characteristic type")
             return
         }
-
         guard let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate) else {
             print("ViewModel.authorizeHealthKit() > could not unwrap heart rate quantity type")
             return
         }
-
         guard let restingHeartRate = HKObjectType.quantityType(forIdentifier: .restingHeartRate) else {
             print("ViewModel.authorizeHealthKit() > could not unwrap resting heart rate quantity type")
             return
         }
-
         let healthKitTypes: Set<HKObjectType> = [ dateOfBirth, heartRate, restingHeartRate ]
         HKHealthStore().requestAuthorization(toShare: nil, read: healthKitTypes) { (success, error) in
             if let error = error {
@@ -73,22 +69,18 @@ class ViewModel: ObservableObject {
                 print("ViewModel.refreshView() > could not unwrap heart rate")
                 return
             }
-
             self.fetchHeartRateZone(heartRate: newHeartRate) { (heartRateZone) in
                 guard let heartRateZone = heartRateZone else {
                     print("ViewModel.refreshView() > could not unwrap heart rate zone")
                     return
                 }
-                
                 DispatchQueue.main.async {
                     self.heartRate = newHeartRate
                     self.heartRateZoneColor = heartRateZone.getColor()
                 }
-
                 print("heartRate: \(newHeartRate), heartRateZone: \(heartRateZone)")
             }
         }
-
         DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 5) {
             self.refreshView()
         }
@@ -145,33 +137,27 @@ class ViewModel: ObservableObject {
     }
 
     private func fetchLatestSample(for typeIdentifier: HKQuantityTypeIdentifier,
-                           _ completion: @escaping (HKQuantitySample?) -> Void) {
+                                   _ completion: @escaping (HKQuantitySample?) -> Void) {
         print("ViewModel.fetchLatestSample(for type: \(typeIdentifier))")
-
         guard let sampleType: HKSampleType = HKObjectType.quantityType(forIdentifier: typeIdentifier) else {
             print("ViewModel.fetchLatestSample() > could not unwrap sample type")
             return
         }
-
         let predicate: NSPredicate = HKQuery.predicateForSamples(withStart: .distantPast, end: .distantFuture,
                                                                  options: .strictEndDate)
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
-
         let query = HKSampleQuery(sampleType: sampleType, predicate: predicate, limit: 1,
                                   sortDescriptors: [sortDescriptor]) { (_, samples, error) in
-
                                     if let error = error {
                                         print("ViewModel.fetchLatestSample() > error: \(error.localizedDescription)")
                                         completion(nil)
                                         return
                                     }
-
                                     guard let sample = samples?.first as? HKQuantitySample else {
                                         print("ViewModel.fetchLatestSample() > could not unwrap sample")
                                         completion(nil)
                                         return
                                     }
-
                                     completion(sample)
         }
         HKHealthStore().execute(query)
@@ -184,7 +170,6 @@ class ViewModel: ObservableObject {
                 completion(nil)
                 return
             }
-
             let newHeartRate = sample.quantity.doubleValue(for: self.heartRateUnit)
             print("ViewModel.fetchHeartRate() > newHeartRate: \(newHeartRate)")
             completion(newHeartRate)
@@ -204,4 +189,3 @@ class ViewModel: ObservableObject {
         }
     }
 }
-

@@ -7,8 +7,9 @@
 //
 
 import Foundation
-import HealthKit
 import SwiftUI
+import HealthKit
+import UserNotifications
 
 class ViewModel: ObservableObject {
 
@@ -92,6 +93,7 @@ class ViewModel: ObservableObject {
                         self.heartRate = newHeartRate
                         self.heartRateZone = newHeartRateZone
                     }
+                    self.sendNotification()
                 } else {
                     DispatchQueue.main.async {
                         self.heartRate = newHeartRate
@@ -102,6 +104,17 @@ class ViewModel: ObservableObject {
         }
         DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 5) {
             self.refreshView()
+        }
+    }
+
+    private func sendNotification() {
+        print("ViewModel.sendNotification()")
+        let content = UNNotificationContent()
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if let error = error {
+                print("ViewModel.sendNotification() > error: \(error.localizedDescription)")
+            }
         }
     }
 
@@ -135,13 +148,13 @@ class ViewModel: ObservableObject {
                 seventyPercent = restingHeartRate + heartRateReserve * 0.7
                 eightyPercent = restingHeartRate + heartRateReserve * 0.8
                 ninetyPercent = restingHeartRate + heartRateReserve * 0.9
+            } else {
+                fiftyPercent = maxHeartRate * 0.5
+                sixtyPercent = maxHeartRate * 0.6
+                seventyPercent = maxHeartRate * 0.7
+                eightyPercent = maxHeartRate * 0.8
+                ninetyPercent = maxHeartRate * 0.9
             }
-
-            fiftyPercent = maxHeartRate * 0.5
-            sixtyPercent = maxHeartRate * 0.6
-            seventyPercent = maxHeartRate * 0.7
-            eightyPercent = maxHeartRate * 0.8
-            ninetyPercent = maxHeartRate * 0.9
 
             switch heartRate {
             case let restingRate where restingRate < fiftyPercent: completion(.resting)

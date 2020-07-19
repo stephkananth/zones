@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		856109C124C298270016EE05 /* Zones WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 856109C024C298270016EE05 /* Zones WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		856109C124C298270016EE05 /* zones.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 856109C024C298270016EE05 /* zones.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		856109C724C298270016EE05 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 856109C524C298270016EE05 /* Interface.storyboard */; };
 		856109C924C2982C0016EE05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 856109C824C2982C0016EE05 /* Assets.xcassets */; };
 		856109D024C2982C0016EE05 /* Zones WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 856109CF24C2982C0016EE05 /* Zones WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -57,7 +57,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				856109C124C298270016EE05 /* Zones WatchKit App.app in Embed Watch Content */,
+				856109C124C298270016EE05 /* zones.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,7 +66,7 @@
 
 /* Begin PBXFileReference section */
 		856109BC24C298270016EE05 /* Zones.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zones.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		856109C024C298270016EE05 /* Zones WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Zones WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		856109C024C298270016EE05 /* zones.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zones.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		856109C624C298270016EE05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		856109C824C2982C0016EE05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		856109CA24C2982C0016EE05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				856109BC24C298270016EE05 /* Zones.app */,
-				856109C024C298270016EE05 /* Zones WatchKit App.app */,
+				856109C024C298270016EE05 /* zones.app */,
 				856109CF24C2982C0016EE05 /* Zones WatchKit Extension.appex */,
 			);
 			name = Products;
@@ -227,7 +227,7 @@
 			);
 			name = "Zones WatchKit App";
 			productName = "Zones WatchKit App";
-			productReference = 856109C024C298270016EE05 /* Zones WatchKit App.app */;
+			productReference = 856109C024C298270016EE05 /* zones.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
 		856109CE24C2982C0016EE05 /* Zones WatchKit Extension */ = {
@@ -529,7 +529,7 @@
 				IBSC_MODULE = Zones_WatchKit_Extension;
 				INFOPLIST_FILE = "Zones WatchKit App/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = stephkananth.Zones.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = zones;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -548,7 +548,7 @@
 				IBSC_MODULE = Zones_WatchKit_Extension;
 				INFOPLIST_FILE = "Zones WatchKit App/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = stephkananth.Zones.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = zones;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

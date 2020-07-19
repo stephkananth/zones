@@ -12,10 +12,10 @@ struct NotificationView: View {
     private let viewModel = ViewModel.shared
 
     var body: some View {
-        guard let previousZoneValue = viewModel.previousHeartRateZone?.rawValue else {
-            return Text("Zone \(viewModel.heartRateZone.rawValue)")
+        guard let previousZone = viewModel.previousHeartRateZone else {
+            return Text("\(viewModel.heartRateZone.getBody())").fontWeight(.ultraLight)
         }
-        return Text("Zone \(previousZoneValue) -> Zone \(viewModel.heartRateZone.rawValue)")
+        return Text("\(previousZone.getBody()) -> \(viewModel.heartRateZone.getBody())").fontWeight(.ultraLight)
     }
 }
 

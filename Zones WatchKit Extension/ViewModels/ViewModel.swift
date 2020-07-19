@@ -41,6 +41,19 @@ class ViewModel: ObservableObject {
             case .veryHard: return .red
             }
         }
+
+        func getBody() -> String {
+            var emoji: String
+            switch self {
+            case .resting: emoji = "⚪️"
+            case .veryLight: emoji = "🔵"
+            case .light: emoji = "🟢"
+            case .moderate: emoji = "🟡"
+            case .hard: emoji = "🟠"
+            case .veryHard: emoji = "🔴"
+            }
+            return "\(emoji) \(self.rawValue)"
+        }
     }
 
     private init() { }
@@ -109,7 +122,8 @@ class ViewModel: ObservableObject {
 
     private func sendNotification() {
         print("ViewModel.sendNotification()")
-        let content = UNNotificationContent()
+        let content = UNMutableNotificationContent()
+        content.title = "Heart Rate Zone Change"
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request) { (error) in
             if let error = error {

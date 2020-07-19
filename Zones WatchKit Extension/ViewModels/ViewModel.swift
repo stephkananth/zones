@@ -12,12 +12,16 @@ import SwiftUI
 
 class ViewModel: ObservableObject {
 
+    static let shared = ViewModel()
+
     private let heartRateUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
 
     @Published var heartRate: Double = 0.0
-    @Published var heartRateZoneColor: Color = .gray
+    @Published var heartRateZone: HeartRateZone = .resting
 
-    private enum HeartRateZone: Int {
+    var previousHeartRateZone: HeartRateZone? = .hard
+
+    enum HeartRateZone: Int {
         case resting = 0
         case veryLight = 1
         case light = 2
@@ -37,6 +41,8 @@ class ViewModel: ObservableObject {
             }
         }
     }
+
+    private init() { }
 
     func authorizeHealthKit() {
         print("ViewModel.authorizeHealthKit()")
@@ -69,16 +75,29 @@ class ViewModel: ObservableObject {
                 print("ViewModel.refreshView() > could not unwrap heart rate")
                 return
             }
-            self.fetchHeartRateZone(heartRate: newHeartRate) { (heartRateZone) in
-                guard let heartRateZone = heartRateZone else {
+
+            guard newHeartRate != self.heartRate else {
+                print("ViewModel.refreshView() > no new data")
+                return
+            }
+
+            self.fetchHeartRateZone(heartRate: newHeartRate) { (newHeartRateZone) in
+                guard let newHeartRateZone = newHeartRateZone else {
                     print("ViewModel.refreshView() > could not unwrap heart rate zone")
                     return
                 }
-                DispatchQueue.main.async {
-                    self.heartRate = newHeartRate
-                    self.heartRateZoneColor = heartRateZone.getColor()
+                if newHeartRateZone != self.heartRateZone {
+                    self.previousHeartRateZone = self.heartRateZone
+                    DispatchQueue.main.async {
+                        self.heartRate = newHeartRate
+                        self.heartRateZone = newHeartRateZone
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.heartRate = newHeartRate
+                    }
                 }
-                print("ViewModel.refreshView() > heartRate: \(newHeartRate), heartRateZone: \(heartRateZone)")
+                print("ViewModel.refreshView() > heartRate: \(newHeartRate), heartRateZone: \(newHeartRateZone)")
             }
         }
         DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 5) {

@@ -9,8 +9,13 @@
 import SwiftUI
 
 struct NotificationView: View {
+    private let viewModel = ViewModel.shared
+
     var body: some View {
-        Text("Hello, World!")
+        guard let previousZoneValue = viewModel.previousHeartRateZone?.rawValue else {
+            return Text("Zone \(viewModel.heartRateZone.rawValue)")
+        }
+        return Text("Zone \(previousZoneValue) -> Zone \(viewModel.heartRateZone.rawValue)")
     }
 }
 

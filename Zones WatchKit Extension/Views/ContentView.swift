@@ -10,13 +10,13 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @ObservedObject var viewModel = ViewModel()
+    @ObservedObject var viewModel = ViewModel.shared
 
     var body: some View {
         ZStack {
             ZStack {
                 Circle()
-                    .fill(viewModel.heartRateZoneColor)
+                    .fill(viewModel.heartRateZone.getColor())
                     .frame(width: 100, height: 100)
                     .overlay(
                         Circle()
